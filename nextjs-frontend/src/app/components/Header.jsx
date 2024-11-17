@@ -26,7 +26,7 @@ const Header = () => {
     return (
         <header
             className={`fixed top-0 left-0 right-0 z-10 transition-transform duration-300 ease-in-out ${visible
-                    ? "translate-y-0 dark:xl:bg-primary xl:bg-[#492c74] dark:xl:bg-opacity-75  xl:bg-opacity-75"
+                    ? "translate-y-0 dark:xl:bg-primary xl:bg-[#ff0000] xl:bg-opacity-20  "
                     : "-translate-y-full xl:bg-transparent"
                 }`}
         >
@@ -35,7 +35,7 @@ const Header = () => {
                     <Link href="/">
                         <h1 className="flex flex-row text-4xl font-semibold gap-0">
                             <div id="firstname">X</div>
-                            <span className="text-[#cbacf9]">.</span>
+                            <span className="text-[#ff0000]">.</span>
                         </h1>
                     </Link>
 
@@ -45,7 +45,7 @@ const Header = () => {
                         <Nav />
 
                         <Link href="/contact">
-                            <button className="transition-all duration-300 p-3 rounded-full text-lg border-white border-2 hover:border-transparent font-light text-white bg-transparent hover:scale-110 hover:bg-[#cbacf9] hover:text-black active:bg-[#cbacf9] focus:outline-none focus:text-white active:text-black focus:ring focus:ring-[#ffffff]">
+                            <button className="transition-all duration-300 p-3 rounded-full text-lg border-white border-2 hover:border-transparent font-light text-white bg-transparent hover:scale-110 hover:bg-[#ff0000] hover:text-black active:bg-[#ff0000] focus:outline-none focus:text-white active:text-black focus:ring focus:ring-[#ffffff]">
                                 FAQs
                             </button>
                         </Link>

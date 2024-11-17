@@ -45,7 +45,7 @@ export default function SmoothProgressBar({ task, hydrationFlag }) {
   };
 
   return (
-    <div className="mb-5 w-full max-w-md mx-auto p-4 bg-black text-white rounded-lg shadow-lg">
+    <div className=" w-full max-w-md mx-auto p-4 bg-black text-white rounded-lg shadow-lg">
       <div className="mb-4">
         <h3 className="text-lg font-bold">{task.name}</h3>
         <p className="text-sm text-gray-400">

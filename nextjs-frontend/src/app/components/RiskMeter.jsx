@@ -50,7 +50,7 @@ export default function RiskMeter({ percentage }) {
   };
 
   return (
-    <Card className="flex flex-col h-[700px]">
+    <Card className="flex flex-col h-[700px] bg-white">
       {/* Risk Meter Chart */}
       <CardHeader className="items-center pb-0">
         <CardTitle>Risk Meter</CardTitle>
