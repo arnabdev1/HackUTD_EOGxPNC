@@ -3,7 +3,6 @@ import { useState } from "react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { CiMail } from "react-icons/ci";
 import { useUserContext } from "../UserContext";
-import LogFetch from "./Fetch";
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -37,7 +36,6 @@ const Login = () => {
                 <div className="md:text-[35px] text-[25px] font-[300] leading-[20px] lg:mb-[40px] mb-[20px]">
                     Agent Log In
                 </div>
-                <LogFetch/>
                 {message && <div className="mt-4 text-green-400">{message}</div>}
 
                 <form className="space-y-4" onSubmit={handleSubmit}>

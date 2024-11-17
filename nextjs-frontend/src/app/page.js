@@ -16,6 +16,8 @@ export default function Home() {
     visible: { opacity: 1, transition: { duration: 1.5, ease: "easeOut" } },
   };
 
+  
+
   // Set up the IntersectionObserver to detect when the section is in view
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -70,7 +72,7 @@ export default function Home() {
 
 
   return (
-    <div className="flex flex-col items-center w-full mt-10">
+    <div className="flex flex-col items-center min-h-[80vh] w-full mt-10">
       <motion.div
         initial="hidden"
         whileInView="visible"
@@ -82,7 +84,7 @@ export default function Home() {
           <TextAnim/>
         </h1>
         <p className="text-lg md:text-xl mb-8">
-         X empowers lease operators with real-time detection and
+         HydraWatch empowers lease operators with real-time detection and
            predictive insights for hydrate formation, ensuring optimal production
           and minimizing downtime.
         </p>
@@ -100,16 +102,6 @@ export default function Home() {
           <h2 className="text-2xl font-semibold mb-4">Login as Admin</h2>
           </Link>
         </button>
-      </div>
-      <div className="flex flex-col items-center justify-center mt-16 text-white w-full">
-        <h1 className="text-6xl md:text-5xl font-bold mb-6">  Upload File for ML Analysis</h1>
-        <div className="w-[500px] flex flex-col justify-center items-center bg-rose-500 bg-opacity-15 p-4 rounded-lg shadow-lg mb-4 transform hover:scale-105 transition-transform duration-200 ease-in-out">
-          <span className="text-white mr-2 font-bold mb-2 text-[30px]">Add .csv file</span>
-          <div>
-      <input type="file" accept=".csv" onChange={handleFileChange} />
-      <button onClick={handleUpload}>Upload CSV</button>
-    </div>
-        </div>
       </div>
       
       

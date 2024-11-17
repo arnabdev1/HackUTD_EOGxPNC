@@ -25,7 +25,7 @@ const Header = () => {
 
     return (
         <header
-            className={`fixed top-0 left-0 right-0 z-10 transition-transform duration-300 ease-in-out ${visible
+            className={`px-3 fixed top-0 left-0 right-0 z-10 transition-transform duration-300 ease-in-out ${visible
                     ? "translate-y-0 dark:xl:bg-primary  xl:bg-opacity-20 xl:bg-gradient-to-b xl:from-red-950 xl:to-transparent "
                     : "-translate-y-full xl:bg-transparent"
                 }`}
@@ -34,7 +34,7 @@ const Header = () => {
                 <div className="container mx-auto flex justify-between items-center">
                     <Link href="/">
                         <h1 className="flex flex-row text-4xl font-semibold gap-0">
-                            <div id="firstname">X</div>
+                            <div id="firstname">HydraWatch</div>
                             <span className="text-[#ff0000]">.</span>
                         </h1>
                     </Link>
