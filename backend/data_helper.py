@@ -4,7 +4,7 @@ import requests
 import pickle
 import pandas as pd
 
-def send_each(src_path, route="http://localhost:5000/api/pipes"): #r0
+def send_each(src_path, route="http://localhost:5000/api/data"): #r0
     for each in os.listdir(src_path):
         if os.path.isdir(os.path.join(src_path, each)):
             send_each(os.path.join(src_path, each))

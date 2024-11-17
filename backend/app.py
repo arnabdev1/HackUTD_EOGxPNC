@@ -2,11 +2,14 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import os
 import json
+import data_helper
 
 app = Flask(__name__)
 CORS(app)  
 
 DB_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "./data.json"))
+
+data_helper.send_each("../machine-learning/normalized-data")
 
 def load_pipe():
     with open(DB_PATH, "r") as f:
