@@ -87,12 +87,12 @@ export default function RiskMeter({ percentage }) {
                         dominantBaseline="middle"
                       >
                         <tspan
-                          x={viewBox.cx}
-                          y={viewBox.cy}
-                          className="fill-foreground text-4xl font-bold"
-                        >
-                          {percentage.toLocaleString()}%
-                        </tspan>
+  x={viewBox.cx}
+  y={viewBox.cy}
+  className="fill-foreground text-4xl font-bold"
+>
+  {percentage !== undefined && !isNaN(percentage) ? percentage.toLocaleString() : "N/A"}%
+</tspan>
                         <tspan
                           x={viewBox.cx}
                           y={(viewBox.cy || 0) + 24}
