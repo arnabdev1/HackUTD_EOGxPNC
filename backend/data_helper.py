@@ -4,15 +4,15 @@ import requests
 import pickle
 import pandas as pd
 
-def send_each(src_path, route="http://localhost:5000/api/data"): #r0
+def send_each(src_path): #r0
     for each in os.listdir(src_path):
         if os.path.isdir(os.path.join(src_path, each)):
             send_each(os.path.join(src_path, each))
         else:
             with open(os.path.join(src_path, each), "r") as f:
                 data = json.load(f)
-            r = requests.post(route, json=data)
-            print(r.text)
+    
+    return data
             
 
 def analyze_data(csv_src_path, model_pkl_path):

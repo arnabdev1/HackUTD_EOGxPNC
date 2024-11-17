@@ -26,5 +26,9 @@ def echo():
     user_input = data.get('input')
     return jsonify({"output": user_input})
 
+@app.route('/api/data', methods=['POST'])
+def data():
+    return jsonify(data_helper.send_each("../machine-learning/normalized-data"))
+
 if __name__ == '__main__':
     app.run(debug=True)
