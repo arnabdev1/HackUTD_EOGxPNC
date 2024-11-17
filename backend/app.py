@@ -2,7 +2,9 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import os
 import json
-import data_helper
+import pickle
+import pandas as pd
+import numpy as np
 
 app = Flask(__name__)
 CORS(app)  
@@ -16,7 +18,6 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 
-data_helper.send_each("../machine-learning/normalized-data")
 
 def load_pipe():
     with open(DB_PATH, "r") as f:
@@ -33,9 +34,6 @@ def echo():
     user_input = data.get('input')
     return jsonify({"output": user_input})
 
-@app.route('/api/data', methods=['POST'])
-def data():
-    return jsonify(data_helper.send_each("../machine-learning/normalized-data"))
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
@@ -50,11 +48,38 @@ def upload_file():
     if file and file.filename.endswith('.csv'):
         filepath = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
         file.save(filepath)
-        data_helper.analyze_data("./uploads/Fearless_709H-10_31-11_07.csv", "/Users/sifatislam/Downloads/PROJECTS/Hack UTD/HackUTD_EOGxPNC/machine-learning/model_95.pkl")
-        print("data helper called")
+        run_model(filepath)
         return {"message": "File successfully uploaded"}, 200
     else:
         return {"message": "Invalid file type. Only CSV files are allowed."}, 400
+
+
+def run_model(filepath):
+    print(f"Running model on {filepath}")
+    # Load the model and run it on the file
+    model = pickle.load(open("../machine-learning/model_new.pkl", "rb"))
+    model2 = pickle.load(open("../machine-learning/model_95.pkl", "rb"))
+    data = pd.read_csv(filepath)
+    
+    # For each row
+    for each in data.iterrows():
+        params = np.array([each[1].values[1], each[1].values[3]]).reshape(1, -1)
+        
+        # params = np.array([each[1], each[3]])
+        try:
+            if model.predict(params) > 0.05:
+                print("Anomaly detected")
+                print("Possible hydration at time: ", each[1].values[0])
+        except:
+            print("Missing data")
+        
+        
+    predictions = model.predict(data)
+    print(predictions)
+    print("Model run successful")
+    # print the data results
+    
+    
 
 
 if __name__ == '__main__':
