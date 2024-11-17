@@ -17,7 +17,7 @@ import {
 
 export default function Graph({ title, description, data, xKey, yKeys, footer }) {
   return (
-    <Card className="w-[480px] h-[325px]">
+    <Card className="w-[480px] h-[325px] text-white bg-zinc-800 bg-opacity-50 border-none">
       <CardHeader>
         <CardTitle>{title}</CardTitle>
         <CardDescription>{description}</CardDescription>
@@ -67,6 +67,7 @@ export default function Graph({ title, description, data, xKey, yKeys, footer })
                 fillOpacity={0.4}
                 stroke={yKeys[key].color}
                 stackId="a"
+                className="bg-white"
               />
             ))}
           </AreaChart>

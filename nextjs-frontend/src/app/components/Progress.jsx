@@ -46,10 +46,10 @@ const Progress = ({ onViewDetails }) => {
       {tasks.map((task) => (
         <div
           key={task.id}
-          className="w-[700px] flex flex-row justify-center items-center bg-[#ff0000] bg-opacity-20 p-4 rounded-lg shadow-lg mb-4"
-        >
+          className="w-[700px] flex flex-row justify-center items-center bg-rose-600 bg-opacity-35 p-4 rounded-lg shadow-lg mb-4 transform hover:scale-105 transition-transform duration-200 ease-in-out"
+          >
           <HydrationProgressBar task={task} hydrationFlag={task.isHydrated} />
-          <button onClick={onViewDetails} className="border-[1px] border-white bg-transparent rounded-md flex flex-row p-2 hover:bg-black hover:border-none duration-200 hover:text-black transition-colors">
+          <button onClick={onViewDetails} className="border-[2px] border-white bg-transparent rounded-md flex flex-row p-2 hover:bg-black hover:border-none duration-200 hover:text-white font-bold transition-colors">
             <span className="text-white mr-2">View Details</span>
           </button>
         </div>
