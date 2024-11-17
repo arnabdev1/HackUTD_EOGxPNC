@@ -36,6 +36,39 @@ export default function Home() {
       }
     };
   }, []);
+
+  const [file, setFile] = useState(null);
+
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
+  };
+
+  const handleUpload = async () => {
+    if (!file) {
+      alert("Please select a file first!");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+      const response = await fetch("http://127.0.0.1:5000/upload", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (response.ok) {
+        alert("File uploaded successfully!");
+      } else {
+        alert("File upload failed!");
+      }
+    } catch (error) {
+      console.error("Error uploading file:", error);
+    }
+  };
+
+
   return (
     <div className="flex flex-col items-center w-full mt-10">
       <motion.div
@@ -77,12 +110,7 @@ export default function Home() {
             accept=".csv"
             id="csv-upload"
             className="hidden"
-            onChange={(event) => {
-              const file = event.target.files[0];
-              if (file) {
-                console.log("File uploaded:", file.name);
-              }
-            }}
+            onChange={handleUpload}
           />
           <label
             htmlFor="csv-upload"
