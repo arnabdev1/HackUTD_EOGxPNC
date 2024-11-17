@@ -2,9 +2,12 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import os
 import json
+<<<<<<< HEAD
 import pickle
 import pandas as pd
 import numpy as np
+=======
+>>>>>>> a1229a45366d872752562b01639f9358f5e3b891
 
 app = Flask(__name__)
 CORS(app)  
@@ -17,8 +20,11 @@ UPLOAD_FOLDER = './uploads'
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> a1229a45366d872752562b01639f9358f5e3b891
 def load_pipe():
     with open(DB_PATH, "r") as f:
         data = json.load(f)

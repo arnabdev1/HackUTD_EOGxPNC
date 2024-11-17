@@ -105,19 +105,10 @@ export default function Home() {
         <h1 className="text-6xl md:text-5xl font-bold mb-6">  Upload File for ML Analysis</h1>
         <div className="w-[500px] flex flex-col justify-center items-center bg-rose-500 bg-opacity-15 p-4 rounded-lg shadow-lg mb-4 transform hover:scale-105 transition-transform duration-200 ease-in-out">
           <span className="text-white mr-2 font-bold mb-2 text-[30px]">Add .csv file</span>
-          <input
-            type="file"
-            accept=".csv"
-            id="csv-upload"
-            className="hidden"
-            onChange={handleUpload}
-          />
-          <label
-            htmlFor="csv-upload"
-            className="cursor-pointer border-[2px] border-white bg-transparent rounded-md flex flex-row py-2 pl-3 pr-2 hover:bg-black hover:border-none duration-200 hover:text-white font-bold transition-colors"
-          >
-            <span className="text-white mr-2">Upload</span>
-          </label>
+          <div>
+      <input type="file" accept=".csv" onChange={handleFileChange} />
+      <button onClick={handleUpload}>Upload CSV</button>
+    </div>
         </div>
       </div>
       
