@@ -50,7 +50,7 @@ export default function RiskMeter({ percentage }) {
   };
 
   return (
-    <Card className="flex flex-col h-[700px] bg-white">
+    <Card className="flex flex-col h-[680px] text-white bg-zinc-800 bg-opacity-50 border-none">
       {/* Risk Meter Chart */}
       <CardHeader className="items-center pb-0">
         <CardTitle>Risk Meter</CardTitle>
@@ -164,11 +164,9 @@ export default function RiskMeter({ percentage }) {
       {/* Footer */}
       <CardFooter className="flex-col gap-2 text-sm">
         <div className="flex items-center gap-2 font-medium leading-none">
-          Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
+          Based on results from ML Model
         </div>
-        <div className="leading-none text-muted-foreground">
-          Showing risk and maintenance data for the last 6 months
-        </div>
+        
       </CardFooter>
     </Card>
   );

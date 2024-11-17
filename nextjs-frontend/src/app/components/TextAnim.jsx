@@ -1,9 +1,8 @@
 import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import { useEffect, useState } from "react";
 import CursorBlinker from "./CursorBlinker";
-
 export default function TextAnim() {
-  const baseText = "Revolutionizing Pipeline Management";
+  const baseText = "Welcome to X"; // If `text` is undefined, it will default to an empty string.
   const count = useMotionValue(0);
   const rounded = useTransform(count, (latest) => Math.round(latest));
   const displayText = useTransform(rounded, (latest) => baseText.slice(0, latest));
@@ -18,7 +17,7 @@ export default function TextAnim() {
 
     // Cleanup the animation on component unmount
     return () => controls.stop();
-  }, []);
+  }, [baseText]); // Added baseText as a dependency
 
   return (
     <span>
