@@ -5,31 +5,40 @@ import { CiViewBoard } from "react-icons/ci";
 
 const Progress = ({ onViewDetails }) => {
   const [tasks, setTasks] = useState([]);
+  
+  // Function to fetch and update the task data
+  const fetchData = async () => {
+    try {
+      const response = await fetch("http://127.0.0.1:5000/api/pipes");
+      const data = await response.json();
+
+      // Transform the API data into the format required by HydrationProgressBar
+      const transformedTasks = data.map((pipe) => ({
+        id: pipe.id, // Use `id` from the API as both id and name
+        name: pipe.id,
+        workDone: 0, // Default to 0 as no work has been done yet
+        workRemaining: pipe.hydration_time, // Map `hydration_time` to `workRemaining`
+        progress: 0, // Initial progress
+        isHydrated: pipe.is_hydrated, // Add `is_hydrated` from the API
+      }));
+
+      setTasks(transformedTasks);
+    } catch (error) {
+      console.error("Failed to fetch data:", error);
+    }
+  };
 
   useEffect(() => {
-    // Fetch data from the API
-    const fetchData = async () => {
-      try {
-        const response = await fetch("http://127.0.0.1:5000/api/pipes");
-        const data = await response.json();
-
-        // Transform the API data into the format required by HydrationProgressBar
-        const transformedTasks = data.map((pipe) => ({
-          id: pipe.id, // Use `id` from the API as both id and name
-          name: pipe.id,
-          workDone: 0, // Default to 0 as no work has been done yet
-          workRemaining: pipe.hydration_time, // Map `hydration_time` to `workRemaining`
-          progress: 0, // Initial progress
-          isHydrated: pipe.is_hydrated, // Add `is_hydrated` from the API
-        }));
-
-        setTasks(transformedTasks);
-      } catch (error) {
-        console.error("Failed to fetch data:", error);
-      }
-    };
-
+    // Fetch data initially
     fetchData();
+
+    // Set up polling to fetch data every 5 seconds (5000 ms)
+    const intervalId = setInterval(() => {
+      fetchData();
+    }, 5000); // Adjust the interval as needed
+
+    // Clean up the interval on component unmount
+    return () => clearInterval(intervalId);
   }, []);
 
   return (

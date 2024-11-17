@@ -5,6 +5,10 @@ export default function SmoothProgressBar({ task, hydrationFlag }) {
   const [timeLeft, setTimeLeft] = useState(task.workRemaining); // Remaining time in seconds
 
   useEffect(() => {
+    // Reset the progress when task or hydrationFlag changes
+    setProgress(0);
+    setTimeLeft(task.workRemaining);
+
     if (hydrationFlag) {
       // If the flag is true, instantly finish the progress bar
       setProgress(100);
@@ -34,8 +38,8 @@ export default function SmoothProgressBar({ task, hydrationFlag }) {
       }
     }, 16); // Update every ~16ms for a smooth 60fps animation
 
-    return () => clearInterval(interval);
-  }, [task.workRemaining, hydrationFlag]);
+    return () => clearInterval(interval); // Cleanup on unmount
+  }, [task.workRemaining, hydrationFlag]); // Dependency on task workRemaining and hydrationFlag
 
   // Determine the bar color based on time remaining
   const getBarColor = () => {
@@ -45,7 +49,7 @@ export default function SmoothProgressBar({ task, hydrationFlag }) {
   };
 
   return (
-    <div className=" w-full max-w-md mx-auto p-4 bg-black text-white rounded-lg shadow-lg">
+    <div className="w-full max-w-md mx-auto p-4 bg-black text-white rounded-lg shadow-lg">
       <div className="mb-4">
         <h3 className="text-lg font-bold">{task.name}</h3>
         <p className="text-sm text-gray-400">

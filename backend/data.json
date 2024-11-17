@@ -2,22 +2,22 @@
     "pipes": [
         {
             "id": "Pipe 1",
-            "hydration_time": 10,
+            "hydration_time": 1000,
             "is_hydrated": false
         },
         {
             "id": "Pipe 2",
-            "hydration_time": 50,
-            "is_hydrated": false
-        },
-        {
-            "id": "Pipe 3",
-            "hydration_time": 30,
+            "hydration_time": 150,
             "is_hydrated": true
         },
         {
+            "id": "Pipe 3",
+            "hydration_time": 150,
+            "is_hydrated": false
+        },
+        {
             "id": "Pipe 4",
-            "hydration_time": 100,
+            "hydration_time": 20000,
             "is_hydrated": false
         }
     ]

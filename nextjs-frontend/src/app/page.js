@@ -10,6 +10,9 @@ export default function Home() {
   const toggleView = () => {
     setShowDashboard(!showDashboard);
   };
+  const showHome = () => {
+    setShowDashboard(false);
+  };
 
   return (
     <div className="flex flex-col items-center w-full mt-8">
@@ -35,7 +38,7 @@ export default function Home() {
             transition={{ duration: 0.5 }}
             className="w-full"
           >
-            <Dashboard />
+            <Dashboard home={showHome}/>
           </motion.div>
         )}
       </AnimatePresence>
