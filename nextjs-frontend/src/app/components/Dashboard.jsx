@@ -3,7 +3,7 @@ import { useState } from "react";
 import Graph from "./Graph";
 import RiskMeter from "./RiskMeter";
 
-const Dashboard = () => {
+const Dashboard = ({home}) => {
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
   const riskPercentage = 90;
@@ -139,7 +139,10 @@ const Dashboard = () => {
     },
   };
   return (
-    <div className="flex flex-row items-center justify-center w-full min-h-screen bg-transparent gap-5">
+    <div className="flex flex-col w-full h-auto p-3">
+      <button className="w-[80px]  transition-all duration-300 px-3 py-2 rounded-full text-lg border-white border-2 hover:border-transparent font-light text-white bg-transparent hover:scale-110 hover:bg-[#ff0000] hover:text-black active:bg-[#ff0000] focus:outline-none focus:text-white active:text-black focus:ring focus:ring-[#ffffff]" onClick={home}>Back</button>
+        
+      <div className="flex flex-row items-center justify-center w-full min-h-screen bg-transparent gap-5">
         <div className="flex flex-col items-center justify-center w-[70%] gap-5">
         <div className="flex flex-row items-center justify-center w-full gap-10">
           <Graph
@@ -220,6 +223,8 @@ const Dashboard = () => {
       <RiskMeter percentage={riskPercentage} />
       
     </div>
+    </div>
+    
   )
 }
 

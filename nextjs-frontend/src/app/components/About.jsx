@@ -41,27 +41,27 @@ const About = () => {
         viewport={{ once: true }}
         className=" grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto mt-16"
       >        
-      <div className="hover:scale-120 transition-all duration-200 bg-white bg-opacity-10 p-6 rounded-lg shadow-lg ">
+      <button className="hover:scale-120 transition-all duration-200 bg-white bg-opacity-10 p-6 rounded-lg shadow-lg ">
           <h2 className="text-2xl font-semibold mb-4">Real-Time Detection</h2>
           <p>
             Monitor gas injection and valve performance to instantly detect
             hydrate blockages and prevent production loss.
           </p>
-        </div>
-        <div className="hover:scale-120 transition-all duration-200 bg-white bg-opacity-10 p-6 rounded-lg shadow-lg">
+        </button>
+        <button className="hover:scale-120 transition-all duration-200 bg-white bg-opacity-10 p-6 rounded-lg shadow-lg">
           <h2 className="text-2xl font-semibold mb-4">Predictive Insights</h2>
           <p>
             Leverage historical and current data to forecast hydrate formation
             and take action before issues arise.
           </p>
-        </div>
-        <div className="hover:scale-120 transition-all duration-200 bg-white bg-opacity-10 p-6 rounded-lg shadow-lg">
+        </button>
+        <button className="hover:scale-120 transition-all duration-200 bg-white bg-opacity-10 p-6 rounded-lg shadow-lg">
           <h2 className="text-2xl font-semibold mb-4">Enhanced Efficiency</h2>
           <p>
             Reduce costly well shutdowns and improve overall pipeline management
             with cutting-edge technology.
           </p>
-        </div>
+        </button>
       </motion.div>
 
       {/* Call to Action */}
