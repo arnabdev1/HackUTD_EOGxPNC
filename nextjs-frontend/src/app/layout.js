@@ -30,7 +30,7 @@ export default function RootLayout({ children }) {
         <UserProvider>
           <Header />
           <BackgroundEffect />
-          <div className="mt-24">
+          <div className="mt-24 min-h-[80vh]">
             {children}
           </div>
           <Footer />

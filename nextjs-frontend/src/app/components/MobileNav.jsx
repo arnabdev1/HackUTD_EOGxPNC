@@ -9,7 +9,7 @@ import { useState } from "react";
 const MobileNav = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-    const links = [
+const links = [
     {
         name: "home",
         path: "/",

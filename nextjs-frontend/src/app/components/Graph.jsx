@@ -42,7 +42,17 @@ export default function Graph({ title, description, data, xKey, yKeys, footer })
               tickLine={false}
               axisLine={false}
               tickMargin={8}
-              tickFormatter={(value) => value.slice(0, 3)}
+              tickFormatter={(value) => {
+  if (typeof value === 'string') {
+    // If it's already a string, slice the first 3 characters (e.g., the year)
+    return value.slice(0, 3);
+  } else if (value instanceof Date) {
+    // If it's a Date object, format it as needed
+    return value.toISOString().slice(0, 10); // Format to "YYYY-MM-DD"
+  }
+  return value; // Default case, return the value as is if it's not a string or Date
+}}
+
               label={{ value: "Time", position: "bottom", offset: 10 }} // Add x-axis label
             />
             

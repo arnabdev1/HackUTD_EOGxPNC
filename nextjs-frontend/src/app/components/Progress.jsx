@@ -9,7 +9,7 @@ const Progress = ({ onViewDetails }) => {
 
   const fetchData = async () => {
     try {
-      const response = await fetch("http://127.0.0.1:5000/api/pipes");
+      const response = await fetch("/pipes.json");  // Correct path to fetch the JSON
       const data = await response.json();
 
       const transformedTasks = data.map((pipe) => ({
@@ -48,7 +48,7 @@ const Progress = ({ onViewDetails }) => {
         {tasks.map((task) => (
           <div
             key={task.id}
-            className="w-[700px] flex flex-row justify-center items-center bg-rose-500 bg-opacity-15 p-4 rounded-lg shadow-lg mb-4 transform hover:scale-105 transition-transform duration-200 ease-in-out"
+            className="xl:w-[700px] gap-1 w-[500px] flex flex-row justify-center items-center bg-rose-500 bg-opacity-15 p-4 rounded-lg shadow-lg mb-4 transform hover:scale-105 transition-transform duration-200 ease-in-out"
           >
             <SmoothProgressBar
               task={task}
@@ -57,7 +57,7 @@ const Progress = ({ onViewDetails }) => {
             />
             <button
               onClick={onViewDetails}
-              className="border-[2px] border-white bg-transparent rounded-md flex flex-row p-2 hover:bg-black hover:border-none duration-200 hover:text-white font-bold transition-colors"
+              className="border-[2px] border-white bg-transparent rounded-md flex flex-row xl:p-2 hover:bg-black hover:border-none duration-200 hover:text-white font-bold transition-colors"
             >
               <span className="text-white mr-2">View Details</span>
             </button>
