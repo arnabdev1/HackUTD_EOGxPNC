@@ -37,7 +37,7 @@ export default function Home() {
     };
   }, []);
   return (
-    <div className="flex flex-col items-center w-full mt-8">
+    <div className="flex flex-col items-center w-full mt-10">
       <motion.div
         initial="hidden"
         whileInView="visible"
@@ -49,8 +49,8 @@ export default function Home() {
           <TextAnim/>
         </h1>
         <p className="text-lg md:text-xl mb-8">
-          X empowers lease operators with real-time detection and
-          predictive insights for hydrate formation, ensuring optimal production
+         X empowers lease operators with real-time detection and
+           predictive insights for hydrate formation, ensuring optimal production
           and minimizing downtime.
         </p>
       </motion.div>
