@@ -1,6 +1,4 @@
-#!/bin/sh
-'''exec' "/Users/sifatislam/Downloads/PROJECTS/Hack UTD/HackUTD_EOGxPNC/backend/venv/bin/python3.11" "$0" "$@"
-' '''
+#!/Users/arnab/Downloads/Projects/HackUTD_EOGxPNC/backend/venv/bin/python3.13
 # -*- coding: utf-8 -*-
 import re
 import sys
