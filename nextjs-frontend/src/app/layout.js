@@ -2,6 +2,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Header from "./components/Header";
 import BackgroundEffect from "./components/BackgroundEffect";
+import Footer from "./components/Footer";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -31,8 +32,10 @@ export default function RootLayout({ children }) {
       <div className="mt-24">
           {children}
       </div>
-        
+      
+        <Footer/>
       </body>
+      
     </html>
   );
 }

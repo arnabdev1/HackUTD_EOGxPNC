@@ -50,7 +50,7 @@ export default function RiskMeter({ percentage }) {
   };
 
   return (
-    <Card className="flex flex-col h-[700px]">
+    <Card className="flex flex-col h-[700px] bg-white">
       {/* Risk Meter Chart */}
       <CardHeader className="items-center pb-0">
         <CardTitle>Risk Meter</CardTitle>
@@ -87,12 +87,12 @@ export default function RiskMeter({ percentage }) {
                         dominantBaseline="middle"
                       >
                         <tspan
-                          x={viewBox.cx}
-                          y={viewBox.cy}
-                          className="fill-foreground text-4xl font-bold"
-                        >
-                          {percentage.toLocaleString()}%
-                        </tspan>
+  x={viewBox.cx}
+  y={viewBox.cy}
+  className="fill-foreground text-4xl font-bold"
+>
+  {percentage !== undefined && !isNaN(percentage) ? percentage.toLocaleString() : "N/A"}%
+</tspan>
                         <tspan
                           x={viewBox.cx}
                           y={(viewBox.cy || 0) + 24}
