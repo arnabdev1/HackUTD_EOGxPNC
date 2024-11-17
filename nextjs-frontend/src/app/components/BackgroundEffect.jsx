@@ -16,7 +16,7 @@ export default function BackgroundEffect() {
       const yPercent = (clientY / height) * 100;
 
       // Update the background gradient based on cursor position
-      document.body.style.background = `radial-gradient(circle at ${xPercent}% ${yPercent}%, #aa0000, #000000)`;
+      document.body.style.background = `radial-gradient(circle at ${xPercent}% ${yPercent}%, #330000, #000000)`;
     };
 
     // Attach the mousemove event listener
