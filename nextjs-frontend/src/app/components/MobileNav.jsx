@@ -1,4 +1,5 @@
 "use client";
+import { RiCloseCircleFill } from "react-icons/ri";
 
 import { usePathname } from "next/navigation";
 import Link from "next/link";
@@ -19,47 +20,58 @@ const MobileNav = () => {
         },
         {
             name: "About Us",
-            path: "about",
+            path: "/about",
         },
     ];
 
     const pathname = usePathname();
 
     return (
-        <div className="bg-[#492c74] dark:bg-primary">
+        <div className="bg-[#000000]">
             {/* Menu Trigger */}
             <button
                 className="flex justify-center items-center"
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 aria-label="Toggle Menu"
             >
-                <CiMenuFries className="md:text-[32px] text-[24px] text-[#cbacf9]" />
+                <CiMenuFries className="md:text-[32px] text-[24px] text-[#ff0000]" />
             </button>
 
-            {/* Menu Content */}
-            {isMenuOpen && (
-                <div className="bg-[#492c74] dark:bg-primary flex flex-col p-4 absolute top-0 left-0 w-full h-screen z-50">
-                    {/* User Info */}
-                    <div className="mt-10 mb-10 text-center flex flex-row items-center justify-center gap-2 md:text-2xl text-xl">
-                        <div>Arnab</div>
-                        <div>Dev</div>
-                    </div>
+            {/* Sidebar Menu */}
+            <div
+                className={`fixed top-0 right-0 w-64 h-full bg-[#000000] dark:bg-primary z-50 transform transition-transform duration-300 ease-in-out ${
+                    isMenuOpen ? "translate-x-0" : "translate-x-full"
+                }`}
+            >
+                <div className="flex justify-between items-center p-4">
+                    {/* Close Button */}
+                    <button
+                        onClick={() => setIsMenuOpen(false)}
+                        className="text-[#ff0000] text-3xl"
+                    >
+                        <RiCloseCircleFill />
 
-                    {/* Navigation Links */}
+                    </button>
+                </div>
+
+                {/* Navigation Links */}
+                <div className="flex flex-col p-4 gap-5 bg-black h-screen ">
                     {links.map((link, index) => (
                         <Link
                             href={link.path}
                             key={index}
-                            className={`${link.path === pathname &&
-                                "text-[#cbacf9] border-b-2 border-[#cbacf9]"
-                                } capitalize font-medium hover:text-[#cbacf9] transition-all`}
+                            className={`${
+                                link.path === pathname
+                                    ? "text-[#ff0000] border-b-2 border-[#000000]"
+                                    : "text-[#ffffff]"
+                            } capitalize font-bold hover:text-[#ff0000] transition-all`}
                             onClick={() => setIsMenuOpen(false)} // Close menu on link click
                         >
                             {link.name}
                         </Link>
                     ))}
                 </div>
-            )}
+            </div>
         </div>
     );
 };

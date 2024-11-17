@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import HydrationProgressBar from "./Hydration";
 import { CiViewBoard } from "react-icons/ci";
 
-const Progress = () => {
+const Progress = ({ onViewDetails }) => {
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
@@ -40,7 +40,7 @@ const Progress = () => {
           className="w-[700px] flex flex-row justify-center items-center bg-[#ff0000] bg-opacity-20 p-4 rounded-lg shadow-lg mb-4"
         >
           <HydrationProgressBar task={task} hydrationFlag={task.isHydrated} />
-          <button className="border-[1px] border-white bg-transparent rounded-md flex flex-row p-2 hover:bg-black hover:border-none duration-200 hover:text-black transition-colors">
+          <button onClick={onViewDetails} className="border-[1px] border-white bg-transparent rounded-md flex flex-row p-2 hover:bg-black hover:border-none duration-200 hover:text-black transition-colors">
             <span className="text-white mr-2">View Details</span>
           </button>
         </div>
