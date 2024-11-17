@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 
-export default function SmoothProgressBar({ task, hydrationFlag }) {
+export default function SmoothProgressBar({ task, hydrationFlag, onTaskAlert }) {
   const [progress, setProgress] = useState(0); // Start at 0%
   const [timeLeft, setTimeLeft] = useState(task.workRemaining); // Remaining time in seconds
 
   useEffect(() => {
-    // Reset the progress when task or hydrationFlag changes
     setProgress(0);
     setTimeLeft(task.workRemaining);
 
@@ -13,39 +12,34 @@ export default function SmoothProgressBar({ task, hydrationFlag }) {
       // If the flag is true, instantly finish the progress bar
       setProgress(100);
       setTimeLeft(0);
+      onTaskAlert(`${task.name} hydrated`); // Send alert to parent
       return;
     }
 
-    const startTime = Date.now(); // Record the start time
-    const totalTime = task.workRemaining * 1000; // Convert to milliseconds
+    const startTime = Date.now();
+    const totalTime = task.workRemaining * 1000;
 
     const interval = setInterval(() => {
-      const elapsedTime = Date.now() - startTime; // Calculate elapsed time
-      const currentProgress = Math.min(
-        (elapsedTime / totalTime) * 100,
-        100
-      ); // Progress based on time elapsed
+      const elapsedTime = Date.now() - startTime;
+      const currentProgress = Math.min((elapsedTime / totalTime) * 100, 100);
       setProgress(currentProgress);
 
-      const remainingTime = Math.max(
-        Math.ceil((totalTime - elapsedTime) / 1000),
-        0
-      ); // Calculate remaining time in seconds
+      const remainingTime = Math.max(Math.ceil((totalTime - elapsedTime) / 1000), 0);
       setTimeLeft(remainingTime);
 
       if (currentProgress >= 100) {
-        clearInterval(interval); // Stop when progress reaches 100%
+        clearInterval(interval);
+        onTaskAlert(`${task.name} hydrated`);
       }
-    }, 16); // Update every ~16ms for a smooth 60fps animation
+    }, 16);
 
     return () => clearInterval(interval); // Cleanup on unmount
-  }, [task.workRemaining, hydrationFlag]); // Dependency on task workRemaining and hydrationFlag
+  }, [task.workRemaining, hydrationFlag]);
 
-  // Determine the bar color based on time remaining
   const getBarColor = () => {
-    if (timeLeft > task.workRemaining * 0.5) return "bg-green-500"; // Safe (green)
-    if (timeLeft > task.workRemaining * 0.2) return "bg-yellow-500"; // Warning (yellow)
-    return "bg-red-500"; // Critical (red)
+    if (timeLeft > task.workRemaining * 0.5) return "bg-green-500";
+    if (timeLeft > task.workRemaining * 0.2) return "bg-yellow-500";
+    return "bg-red-500";
   };
 
   return (
@@ -53,8 +47,7 @@ export default function SmoothProgressBar({ task, hydrationFlag }) {
       <div className="mb-4">
         <h3 className="text-lg font-bold">{task.name}</h3>
         <p className="text-sm text-gray-400">
-          Time remaining:{" "}
-          <span className="font-semibold text-white">{timeLeft}s</span>
+          Time remaining: <span className="font-semibold text-white">{timeLeft}s</span>
         </p>
       </div>
       <div className="w-full bg-gray-700 rounded-full h-6 relative overflow-hidden">

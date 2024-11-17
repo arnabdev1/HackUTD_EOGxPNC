@@ -10,19 +10,23 @@ const MobileNav = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const links = [
-        {
-            name: "home",
-            path: "/",
-        },
-        {
-            name: "Documentation",
-            path: "/documentation",
-        },
-        {
-            name: "About Us",
-            path: "/about",
-        },
-    ];
+    {
+        name: "home",
+        path: "/",
+    },
+    {
+        name: "dashboard",
+        path: "/dashboard",
+    },
+    {
+        name: "Documentation",
+        path: "/documentation",
+    },
+    {
+        name: "About Us",
+        path: "about",
+    },
+];
 
     const pathname = usePathname();
 
