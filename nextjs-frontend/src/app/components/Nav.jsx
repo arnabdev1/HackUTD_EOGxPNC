@@ -2,10 +2,16 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useUserContext } from '../UserContext';  // Import context hook
+
 const links = [
     {
         name: "home",
         path: "/",
+    },
+    {
+        name: "dashboard",
+        path: "/dashboard",
     },
     {
         name: "Documentation",
@@ -18,10 +24,17 @@ const links = [
 ];
 
 const Nav = () => {
-    const pathname = usePathname()
+    const { login, setLogin,setUser } = useUserContext();  // Access login state from context
+    const pathname = usePathname();
+
+    const logout = () => {
+        setLogin(false);
+        setUser("");
+    }
     return (
-        <nav className="flex gap-8">
-            {links.map((link, index) => {
+        <nav className="flex flex-row justify-center items-center gap-8">
+            {login && 
+            links.map((link, index) => {  // Only render links if logged in
                 return (
                     <Link
                         href={link.path}
@@ -33,7 +46,18 @@ const Nav = () => {
                         {link.name}
                     </Link>
                 );
-            })}
+            })
+            
+            
+            }
+
+            {login && (<button onClick={logout}  className="transition-all duration-300 p-3 rounded-full text-lg border-white border-2 hover:border-transparent font-light text-white bg-transparent hover:scale-110 hover:bg-[#000000] hover:text-white active:bg-[#ff0000] focus:outline-none focus:text-white active:text-black focus:ring focus:ring-[#ffffff]">
+                                Logout
+                            </button>
+                        )
+            }
+            
+
         </nav>
     );
 };

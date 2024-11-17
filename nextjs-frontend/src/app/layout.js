@@ -1,8 +1,10 @@
+// layout.jsx
 import localFont from "next/font/local";
 import "./globals.css";
 import Header from "./components/Header";
 import BackgroundEffect from "./components/BackgroundEffect";
 import Footer from "./components/Footer";
+import { AppProvider, UserProvider } from "./UserContext"; // Import the AppProvider
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -23,19 +25,17 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-      <Header/>
-
-      <BackgroundEffect/>
-      <div className="mt-24">
-          {children}
-      </div>
-      
-        <Footer/>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        {/* Wrap your layout with AppProvider to make context accessible */}
+        <UserProvider>
+          <Header />
+          <BackgroundEffect />
+          <div className="mt-24">
+            {children}
+          </div>
+          <Footer />
+      </UserProvider>
       </body>
-      
     </html>
   );
 }

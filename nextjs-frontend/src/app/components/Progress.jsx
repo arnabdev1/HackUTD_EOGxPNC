@@ -1,25 +1,24 @@
 "use client";
 import { useState, useEffect } from "react";
-import HydrationProgressBar from "./Hydration";
+import SmoothProgressBar from "./Hydration";
 import { CiViewBoard } from "react-icons/ci";
 
 const Progress = ({ onViewDetails }) => {
   const [tasks, setTasks] = useState([]);
-  
-  // Function to fetch and update the task data
+  const [alerts, setAlerts] = useState([]); // Manage stacked alerts
+
   const fetchData = async () => {
     try {
       const response = await fetch("http://127.0.0.1:5000/api/pipes");
       const data = await response.json();
 
-      // Transform the API data into the format required by HydrationProgressBar
       const transformedTasks = data.map((pipe) => ({
-        id: pipe.id, // Use `id` from the API as both id and name
+        id: pipe.id,
         name: pipe.id,
-        workDone: 0, // Default to 0 as no work has been done yet
-        workRemaining: pipe.hydration_time, // Map `hydration_time` to `workRemaining`
-        progress: 0, // Initial progress
-        isHydrated: pipe.is_hydrated, // Add `is_hydrated` from the API
+        workDone: 0,
+        workRemaining: pipe.hydration_time,
+        progress: 0,
+        isHydrated: pipe.is_hydrated,
       }));
 
       setTasks(transformedTasks);
@@ -28,32 +27,62 @@ const Progress = ({ onViewDetails }) => {
     }
   };
 
-  useEffect(() => {
-    // Fetch data initially
-    fetchData();
+  const addAlert = (message) => {
+    setAlerts((prevAlerts) => [...prevAlerts, message]);
+    setTimeout(() => {
+      setAlerts((prevAlerts) => prevAlerts.slice(1));
+    }, 99999); // Remove alert after 3 seconds
+  };
 
-    // Set up polling to fetch data every 5 seconds (5000 ms)
+  useEffect(() => {
+    fetchData();
     const intervalId = setInterval(() => {
       fetchData();
-    }, 5000); // Adjust the interval as needed
-
-    // Clean up the interval on component unmount
+    }, 5000);
     return () => clearInterval(intervalId);
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center w-full mt-8">
-      {tasks.map((task) => (
-        <div
-          key={task.id}
-          className="w-[700px] flex flex-row justify-center items-center bg-rose-600 bg-opacity-35 p-4 rounded-lg shadow-lg mb-4 transform hover:scale-105 transition-transform duration-200 ease-in-out"
+    <div className="w-full min-h-screen flex flex-row justify-center items-center">
+      <div className="flex flex-col items-center justify-center w-[70%]">
+        {tasks.map((task) => (
+          <div
+            key={task.id}
+            className="w-[700px] flex flex-row justify-center items-center bg-rose-500 bg-opacity-15 p-4 rounded-lg shadow-lg mb-4 transform hover:scale-105 transition-transform duration-200 ease-in-out"
           >
-          <HydrationProgressBar task={task} hydrationFlag={task.isHydrated} />
-          <button onClick={onViewDetails} className="border-[2px] border-white bg-transparent rounded-md flex flex-row p-2 hover:bg-black hover:border-none duration-200 hover:text-white font-bold transition-colors">
-            <span className="text-white mr-2">View Details</span>
-          </button>
-        </div>
-      ))}
+            <SmoothProgressBar
+              task={task}
+              hydrationFlag={task.isHydrated}
+              onTaskAlert={addAlert} // Pass alert handler
+            />
+            <button
+              onClick={onViewDetails}
+              className="border-[2px] border-white bg-transparent rounded-md flex flex-row p-2 hover:bg-black hover:border-none duration-200 hover:text-white font-bold transition-colors"
+            >
+              <span className="text-white mr-2">View Details</span>
+            </button>
+          </div>
+        ))}
+      </div>
+      
+
+      {/* Alert Notification Stack */}
+      <div className="fixed bottom-4 left-4 flex flex-col space-y-2">
+        {alerts.map((alert, index) => (
+          <div
+            key={index}
+            className="p-4 bg-red-700 text-white rounded-lg shadow-lg flex items-center space-x-2"
+          >
+            <span>{alert}</span>
+            <button
+              className="ml-4 text-white rounded-full p-1 "
+              onClick={() => setAlerts((prevAlerts) => prevAlerts.filter((_, i) => i !== index))}
+            >
+              ✕
+            </button>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
