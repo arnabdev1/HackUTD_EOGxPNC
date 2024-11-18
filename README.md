@@ -1,2 +1,2 @@
-# HackUTD_EOGxPNC
+# Hydra Watch
 Hack UTD hackathon
